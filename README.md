@@ -10,3 +10,12 @@ aight we all know hangman is one of the classics of word games,a louise of sorts
    * a variable to store the *word to be guessed*
    * a variable to store *guessed letters* (does this give it the feature the user woukdnt be able to lose chances if he repeates letter? or do we have to do some voddo to do that? cuz that shit is cool and i need it in my game)
    * a variable to *hold the length* of the blank spaces too ig( the length of the word)
+
+
+# lets break the game down before i have  a breakdown
+* *word selection* (list of words and rando selction)
+*  display the word ( function to display the blanks ang guessed)
+*  functions to input guessed letter and validate (correct, incorrect, and repeated)
+* function to check guessed word and update display, upkeep of no 2
+*  game loop the main game loop that calls the above functions and sets win and lose condition
+  /.crying cuz thats a lot of functions mannn
