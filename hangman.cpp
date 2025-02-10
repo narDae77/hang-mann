@@ -4,21 +4,37 @@
 #include <cstdlib>
 #include<ctime>
 #include <string>
-
 using namespace std;
+
 void displayGameDetailes(int maxTries, int remainingTries);
 string chooseSecretWord();
 void replaceDashes(char guessWord[], int length, string secretWord);
+void checkAndUpdateGuess(char guessWord[], int length, string secretWord, char guess;
+
 int main()
 {
     int maxTries(9);
     int remainingTries(9);
     char guessLetter;
-    string chooseSecretWord;
-    int secretWordLength;
+    string  secretWord= chooseSecretWord();
+    int secretWordLength= secretWord.legth();
+    char guessWord[secretWordLength + 1];
+    replaceDashes(guessWord, secretWordLength, secretWord);
+    guessWord[secretWordLength] = '\0'; 
+    checkAndUpdateGuess(guessWord, secretWordLength, secretWord, guessLetter);
+    displayWord(guessWord, secretWordLength);
     
-    displayGameDetailes( maxTries, remainingTries);
+    displayGameDetails(maxTries, remainingTries);
+    cout << "Your guess word is: ";
+    displayWord(guessWord, secretWordLength);
+    //ere ene i am going to cry uuuu
+    cout << "Enter a letter to guess: ";
+    cin >> guessLetter;
+
+
+    return 0;
 }
+
 //this calls out the display game details functions 
 void displayGameDetailes (int maxTries, int remainingTries){
     cout<<"welcome to hangman dawg, where we hang your man"<<endl;
