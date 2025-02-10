@@ -1,9 +1,13 @@
 //da cpp
 
 #include <iostream>
+#include <cstdlib>
+#include<ctime>
+#include <string>
+
 using namespace std;
 void displayGameDetailes(int maxTries, int remainingTries);
-
+string chooseSecretWord();
 int main()
 {
     int maxTries(9);
@@ -14,6 +18,7 @@ int main()
     
     displayGameDetailes( maxTries, remainingTries);
 }
+//this calls out the display game details functions 
 void displayGameDetailes (int maxTries, int remainingTries){
     cout<<"welcome to hangman dawg, where we hang your man"<<endl;
     cout<<"the number of trials you have is "<<maxTries<<endl;
@@ -23,6 +28,17 @@ void displayGameDetailes (int maxTries, int remainingTries){
 }
 //first part of the code, initializing and the printing stuff
 //yes it was indeed a pain in the ass to make 
+
+
+string chooseSecretWord() {
+    srand(time(NULL));
+    string flowers[]= {"daffodils", "dandalion", "baby-breaths","forget-me-not", "roses", "tulips","sunflowers",...
+    };
+
+    int randomIndex = (rand() % 20);
+    string word = flowers[random index];
+    return word;
+}
 
       /*  if (attemptsLeft == 9) {
             cout<< " " <<endl;
