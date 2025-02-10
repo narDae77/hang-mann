@@ -8,6 +8,7 @@
 using namespace std;
 void displayGameDetailes(int maxTries, int remainingTries);
 string chooseSecretWord();
+void replaceDashes(char guessWord[], int length, string secretWord);
 int main()
 {
     int maxTries(9);
@@ -42,7 +43,18 @@ string chooseSecretWord() {
     string word = flowers[randomIndex];
     return word;
 }
-
+//aight lets go with the guessing option, here it goes and i added a hinting feature 
+void replaceDashes(char guessWord[], int length, string secretWord) {
+    int hints = 2;
+    for (int i = 0; i < length; ++i) {
+        guessWord[i] = '-';
+    }
+    while (hints > 0) {
+        int pos = rand() % length;
+        if (guessWord[pos] == '-') {
+            guessWord[pos] = secretWord[pos];
+            hints--;
+        }
       /*  if (attemptsLeft == 9) {
             cout<< " " <<endl;
             cout<< " " <<endl;
