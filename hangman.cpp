@@ -13,7 +13,7 @@ int main()
     int maxTries(9);
     int remainingTries(9);
     char guessLetter;
-    string secretWord;
+    string chooseSecretWord;
     int secretWordLength;
     
     displayGameDetailes( maxTries, remainingTries);
@@ -32,11 +32,14 @@ void displayGameDetailes (int maxTries, int remainingTries){
 
 string chooseSecretWord() {
     srand(time(NULL));
-    string flowers[]= {"daffodils", "dandalion", "baby-breaths","forget-me-not", "roses", "tulips","sunflowers",...
-    };
+    string flowers[]= 
+    {"daffodils", "dandalion", "baby-breaths","forget-me-not",
+    "roses", "tulips","sunflowers","annemone", "cherry-blossoms", 
+    "camellia", "honey-suckle", "daisy", "mangolia","orchide", "lavender",
+    "lily", "violet", "jasmine", "carnation", "peony" };
 
     int randomIndex = (rand() % 20);
-    string word = flowers[random index];
+    string word = flowers[randomIndex];
     return word;
 }
 
