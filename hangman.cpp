@@ -45,32 +45,54 @@ int main()
     srand(time(NULL));  
     cout << "Random flower: " << chooseSecretWord() << endl;
     
+    //aight what i am about to do rn is tocall out the void function that makes checkes n updates guesses
+    int guesses = 0, correctGuesses = 0;
+    char letter;
+    string word, guess0 = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ";
+    bool correct = false;
+
+    cout<<"Welcome to Hangman!\nWhat word would you like the player to guess?\n";
+    cin>>word;
     int n = word.length();
     cout << "\n\n\n\n\n";
+
+    
     string guess = guess0.substr(0, 2 * n);
+    char guessWord[n + 1];
+    for (int i = 0; i < n; i++) {
+        guessWord[i] = '_';
+    }
+    guessWord[n] = '\0';  // Null-terminate the array
+
     while (true) {
-        cout << guess << endl;
-        cin >> letter;
+       for (int i = 0; i < n; i++) {
+       cout<<guessWord[i]<<" ";
+        }
+        cout<<endl;
+        cin>>letter;
+        checkAndUpdateGuess(guessWord, n, word, letter);
+        correctGuesses = 0;
         for (int i = 0; i < n; i++) {
-            if (letter == word[i]) {
-                guess[2 * i] = letter;
+            if (guessWord[i] != '_') {
                 correctGuesses++;
-                correct = true;
             }
         }
-        if (!correct) guesses++;
+
+        // Check win or lose condition
         if (correctGuesses == n) {
-            cout << word << “\nYou won!” << endl;
+            cout<<word<<"\nYou won!"<<endl;
             break;
         }
         else if (guesses == 9) {
-            cout << word << “\nYou lost!” << endl;
+            cout<< word<< "\nYou lost!"<< endl;
             break;
         }
-        correct = false;
-    //becuase i swear if this wors i am dropping d function 
-        return 0;
 
+        guesses++;
+    }
+
+    return 0;
+}
     
 }
 //there is still an error on line 37 but miving on for now
@@ -119,31 +141,21 @@ void replaceDashes(char guessWord[], int length, string secretWord) {
 }
 //d
 //okay i am supposed to define the function that validates n checks wors but i swear that doofuse's code just look so good 
-    // int n = word.length();
-    // cout << "\n\n\n\n\n";
-    // string guess = guess0.substr(0, 2 * n);
-    // while (true) {
-    //     cout << guess << endl;
-    //     cin >> letter;
-    //     for (int i = 0; i < n; i++) {
-    //         if (letter == word[i]) {
-    //             guess[2 * i] = letter;
-    //             correctGuesses++;
-    //             correct = true;
-    //         }
-    //     }
-    //     if (!correct) guesses++;
-    //     if (correctGuesses == n) {
-    //         cout << word << “\nYou won!” << endl;
-    //         break;
-    //     }
-    //     else if (guesses == 9) {
-    //         cout << word << “\nYou lost!” << endl;
-    //         break;
-    //     }
-    //     correct = false;
-    // }
-
+    
+   void checkAndUpdateGuess(char guessWord[], int length, string secretWord, char guess) {
+    bool correct = false;  // To track if the guess is correct
+       
+    for (int i = 0; i < length; i++) {
+        if (guess == secretWord[i]) {
+            guessWord[2 * i] = guess;  // Update the guessWord at the correct position
+            correct = true;
+        }
+    }
+    
+    if (!correct) {
+        cout << "mtsm Incorrect guess!" << endl;
+    }
+}
 
       /*  if (attemptsLeft == 9) {
             cout<< " " <<endl;
