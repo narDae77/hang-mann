@@ -1,5 +1,3 @@
-//da cpp
-
 #include <iostream>
 #include <cstdlib>
 #include<ctime>
@@ -14,87 +12,77 @@ string chooseSecretWord();
 //c.
 void replaceDashes(char guessWord[], int length, string secretWord);
 //d.
-//void checkAndUpdateGuess(char guessWord[], int length, string secretWord, char guess);
+void checkAndUpdateGuess(char guessWord[], int length, string secretWord, char guess);
 //e.
 string guessWord;
 int secretWordLength;
-
+//f.
+void printHangman(int attemptsLeft);
 //string displayWord(guessWord, secretWordLength);
 
 int main()
 {
+
     int maxTries(9);
     int remainingTries(9);
     char guessLetter;
-    string  secretWord= chooseSecretWord();
-    int secretWordLength= secretWord.length();
+    string secretWord = chooseSecretWord();
+    int secretWordLength = secretWord.length();
     char guessWord[secretWordLength + 1];
     
-    // this is me calling out the functions
+    
     replaceDashes(guessWord, secretWordLength, secretWord);
-    guessWord[secretWordLength] = '\0'; 
-    //checkAndUpdateGuess(guessWord, secretWordLength, secretWord, guessLetter);
-    displayGameDetailes(maxTries, remainingTries);
-    cout << "Your guess word is: ";
-    //displayWord (guessWord, secretWordLength);
-    
-    //what needs to be printed 
-    cout << "Enter a letter to guess: ";
-    cin >> guessLetter;
+    guessWord[secretWordLength] = '\0';
 
-    srand(time(NULL));  
-    cout << "Random flower: " << chooseSecretWord() << endl;
-    
-    //aight what i am about to do rn is tocall out the void function that makes checkes n updates guesses
+
+    displayGameDetailes(maxTries, remainingTries);
     int guesses = 0, correctGuesses = 0;
     char letter;
-    string word, guess0 = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ";
-    bool correct = false;
-
-    cout<<"Welcome to Hangman!\nWhat word would you like the player to guess?\n";
-    cin>>word;
-    int n = word.length();
-    cout << "\n\n\n\n\n";
-
+    int n = secretWord.length();
     
-    string guess = guess0.substr(0, 2 * n);
-    char guessWord[n + 1];
+    
     for (int i = 0; i < n; i++) {
         guessWord[i] = '_';
     }
-    guessWord[n] = '\0';  // Null-terminate the array
-
+    guessWord[n] = '\0'; 
+    
     while (true) {
-       for (int i = 0; i < n; i++) {
-       cout<<guessWord[i]<<" ";
+        
+        for (int i = 0; i < n; i++) {
+            cout<<guessWord[i]<< " ";
         }
         cout<<endl;
+
+        // Get user input
+        cout<<"Enter a letter to guess: ";
         cin>>letter;
-        checkAndUpdateGuess(guessWord, n, word, letter);
+
+        
+        checkAndUpdateGuess(guessWord, n, secretWord, letter);
+        
+        if (guessWord[0] == '_') {
+            guesses++;
+            printHangman(guesses);
+        }
+
         correctGuesses = 0;
-        for (int i = 0; i < n; i++) {
-            if (guessWord[i] != '_') {
+         for (int i = 0; i < n; i++) {
+             if (guessWord[i] != '_') {
                 correctGuesses++;
             }
         }
 
-        // Check win or lose condition
         if (correctGuesses == n) {
-            cout<<word<<"\nYou won!"<<endl;
+            cout<<secretWord << "\nYou won!"<<endl;
+            break;
+        } else if (guesses == maxTries) {
+            cout<<secretWord<<"\nYou lost!"<< endl;
             break;
         }
-        else if (guesses == 9) {
-            cout<< word<< "\nYou lost!"<< endl;
-            break;
-        }
-
-        guesses++;
     }
-
-    return 0;
 }
     
-}
+
 //there is still an error on line 37 but miving on for now
 
 
@@ -129,11 +117,11 @@ string chooseSecretWord() {
 void replaceDashes(char guessWord[], int length, string secretWord) {
     int hints = 2;
     for (int i = 0; i < length; ++i) {
-        guessWord[i] = '-';
+        guessWord[i] = '_';
     }
     while (hints > 0) {
         int pos = rand() % length;
-        if (guessWord[pos] == '-') {
+        if (guessWord[pos] == '_') {
             guessWord[pos] = secretWord[pos];
             hints--;
         }
@@ -141,8 +129,8 @@ void replaceDashes(char guessWord[], int length, string secretWord) {
 }
 //d
 //okay i am supposed to define the function that validates n checks wors but i swear that doofuse's code just look so good 
-    
-   void checkAndUpdateGuess(char guessWord[], int length, string secretWord, char guess) {
+   
+void checkAndUpdateGuess(char guessWord[], int length, string secretWord, char guess) {
     bool correct = false;  // To track if the guess is correct
        
     for (int i = 0; i < length; i++) {
@@ -156,8 +144,10 @@ void replaceDashes(char guessWord[], int length, string secretWord) {
         cout << "mtsm Incorrect guess!" << endl;
     }
 }
+//f
+void printHangman(int attemptsLeft){
 
-      /*  if (attemptsLeft == 9) {
+       if (attemptsLeft == 9) {
             cout<< " " <<endl;
             cout<< " " <<endl;
             cout<<"  " <<endl;
@@ -246,8 +236,7 @@ else if (attemptsLeft ==0){
             cout<< "  |    / \\ "<<endl;
             cout<< "  |      "<<endl;
             cout<< "  |      "<<endl; 
-}*/
+}
+}
 //yes i am just gon go and cry now
 //btw i hope this comes in handy cuz my 2 brai cells didnt think to copy and paste until trial 3
-
-   
